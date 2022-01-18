@@ -1,4 +1,5 @@
 const express = require('express');
+const res = require('express/lib/response');
 
 const hbs = require('hbs');
 const path = require('path');
@@ -29,12 +30,18 @@ app.get('/beers', (req, res) => {
   .getBeers()
   .then(beersFromApi => {
     //console.log('Beers from the database: ', beersFromApi)
-    console.log(beersFromApi[0])
     res.render('beers', {beers: beersFromApi}); //beers: is a key that I define, and needs to match inside hbs file
   })
   .catch(error => console.log(error));
+});
 
-  
+app.get('/random-beer', (req, res) => {
+  punkAPI
+  .getRandom()
+  .then(responseFromAPI => {
+    res.render('random-beer', {randomBeer: responseFromAPI});
+  })
+  .catch(error => console.log(error));
 });
 
 app.listen(3000, () => console.log('🏃‍ on port 3000'));
