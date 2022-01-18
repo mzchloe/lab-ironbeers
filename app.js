@@ -29,8 +29,8 @@ app.get('/beers', (req, res) => {
   .getBeers()
   .then(beersFromApi => {
     //console.log('Beers from the database: ', beersFromApi)
-    console.log(beersFromApi)
-    res.render('beers', {beersFromApi});
+    console.log(beersFromApi[0])
+    res.render('beers', {beers: beersFromApi}); //beers: is a key that I define, and needs to match inside hbs file
   })
   .catch(error => console.log(error));
 
